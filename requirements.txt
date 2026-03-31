@@ -1,0 +1,5 @@
+numpy
+requests
+tifffile
+scikit-image
+tqdm
