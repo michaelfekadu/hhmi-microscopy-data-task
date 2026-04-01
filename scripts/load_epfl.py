@@ -15,6 +15,7 @@ Usage:        python download_epfl.py
 """
 
 import requests
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from tqdm import tqdm
 
@@ -42,25 +43,29 @@ def download(url, path):
                 pbar.update(len(chunk))
 
 
+def download_file(name):
+    out = OUTPUT_DIR / name
+    if out.exists():
+        return f"Skipped {name} (already exists)"
+    url = f"{BASE}/{name}"
+    download(url, out)
+    return f"Done: {name}"
+
+
 def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    for name in FILES:
-        out = OUTPUT_DIR / name
-        if out.exists():
-            print(f"Skipping {name} (already exists)")
-            continue
-
-        url = f"{BASE}/{name}"
-        print(f"Downloading {name} ...")
-        try:
-            download(url, out)
-        except requests.HTTPError as e:
-            print(f"  Failed: {e}")
-            print(f"  The EPFL server may require authentication.")
-            print(f"  Fallback: download via Academic Torrents:")
-            print(f"  https://academictorrents.com/details/3ada3ae6ec71097e63d897cf878051bba3eaba25")
-            return
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        futures = {executor.submit(download_file, name): name for name in FILES}
+        for future in as_completed(futures):
+            try:
+                print(future.result())
+            except requests.HTTPError as e:
+                name = futures[future]
+                print(f"  Failed {name}: {e}")
+                print(f"  The EPFL server may require authentication.")
+                print(f"  Fallback: download via Academic Torrents:")
+                print(f"  https://academictorrents.com/details/3ada3ae6ec71097e63d897cf878051bba3eaba25")
 
     print(f"Done. Files in {OUTPUT_DIR}")
 

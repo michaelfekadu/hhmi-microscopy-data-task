@@ -30,7 +30,7 @@ def main():
 
     # Open the volume (use_https=True avoids needing GCP credentials)
     print("Connecting to hemibrain volume...")
-    vol = CloudVolume(SOURCE, use_https=True, mip=0, progress=True)
+    vol = CloudVolume(SOURCE, use_https=True, mip=0, progress=True, parallel=True)
 
     # Print info
     shape = vol.shape[:3]  # (X, Y, Z)

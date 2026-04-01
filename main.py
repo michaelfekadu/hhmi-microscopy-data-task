@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 SCRIPTS_DIR = Path(__file__).resolve().parent / "scripts"
-MAX_WORKERS = 2
+MAX_WORKERS = 5
 
 
 def all_scripts():
