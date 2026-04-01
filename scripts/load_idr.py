@@ -7,10 +7,7 @@ https://idr.openmicroscopy.org/webclient/img_detail/9846137/?dataset=10740
 Downloads each Z-plane as rendered JPEG, stacks into TIFF.
 
 Note: This gives 8-bit rendered data, not raw pixels.
-For raw data use Aspera/Globus via https://idr.openmicroscopy.org/study/idr0086/
 
-Requirements: pip install requests numpy tifffile tqdm Pillow
-Usage:        python download_idr.py
 """
 
 import json

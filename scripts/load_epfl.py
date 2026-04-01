@@ -5,13 +5,6 @@ https://www.epfl.ch/labs/cvlab/data/data-em/
 
 CA1 hippocampus, 1065x2048x1536, ~5nm isotropic voxels, multipage TIF.
 
-Note: The EPFL download links contain a literal space in the URL path.
-      If documents.epfl.ch returns 401, the files may require EPFL login.
-      In that case, use Academic Torrents as a fallback:
-      https://academictorrents.com/details/3ada3ae6ec71097e63d897cf878051bba3eaba25
-
-Requirements: pip install requests tqdm
-Usage:        python download_epfl.py
 """
 
 import requests
@@ -63,9 +56,6 @@ def main():
             except requests.HTTPError as e:
                 name = futures[future]
                 print(f"  Failed {name}: {e}")
-                print(f"  The EPFL server may require authentication.")
-                print(f"  Fallback: download via Academic Torrents:")
-                print(f"  https://academictorrents.com/details/3ada3ae6ec71097e63d897cf878051bba3eaba25")
 
     print(f"Done. Files in {OUTPUT_DIR}")
 

@@ -9,8 +9,6 @@ a random 1000^3 subregion.
 
 Source: gs://neuroglancer-janelia-flyem-hemibrain/emdata/raw/jpeg
 
-Requirements: pip install cloud-volume numpy tifffile
-Usage:        python download_hemibrain.py
 """
 
 import json

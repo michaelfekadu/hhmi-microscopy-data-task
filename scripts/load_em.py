@@ -6,9 +6,6 @@ https://www.ebi.ac.uk/empiar/EMPIAR-11759/
 Data: 16 .dm3 slices, 1 XML file, and a trakem2 folder with nested subfolders.
 Metadata: JSON from the EMPIAR REST API.
 
-Requirements: pip install requests tqdm
-Usage:        python download_empiar.py
-
 cannot download just the data folder because there's no way to download a folder as a single file 
 from an FTP/HTTPS directory — it's not a zip
 """

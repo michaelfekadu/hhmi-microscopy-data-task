@@ -5,8 +5,6 @@ https://openorganelle.janelia.org/datasets/jrc_mus-nacc-2
 
 Data: s3://janelia-cosem-datasets/jrc_mus-nacc-2/jrc_mus-nacc-2.zarr
 
-Requirements: pip install s3fs requests tqdm
-Usage:        python download_openorganelle.py
 """
 
 import json
