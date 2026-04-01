@@ -7,8 +7,7 @@ in different storage systems.
 
 - `main.py`: single entry point to run all scripts in parallel
 - `scripts/`: dataset-specific download scripts (kept as-is)
-- `data/raw/`: downloaded dataset files
-- `data/manifests/`: optional run manifests/checksums for reproducibility
+- `data/`: downloaded dataset files
 - `requirements.txt`: Python dependencies
 
 ## Quick Start
