@@ -1,5 +1,18 @@
-numpy
+# Download scripts
 requests
+tqdm
+
+# Image I/O
+numpy
+Pillow
 tifffile
 scikit-image
-tqdm
+
+# Cloud / remote access
+cloud-volume
+s3fs
+
+# Notebook
+pandas
+matplotlib
+jupyter
