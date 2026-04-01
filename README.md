@@ -5,7 +5,7 @@ in different storage systems.
 
 ## Repository Structure
 
-- `main.py`: single entry point to run all scripts or only selected scripts
+- `main.py`: single entry point to run all scripts in parallel
 - `scripts/`: dataset-specific download scripts (kept as-is)
 - `data/raw/`: downloaded dataset files
 - `data/manifests/`: optional run manifests/checksums for reproducibility
@@ -20,17 +20,15 @@ in different storage systems.
 pip install -r requirements.txt
 ```
 
-3. Run downloads:
+3. Run all downloads:
 
 ```bash
-# List scripts in ./scripts
-python3 main.py --list
+python3 main.py
+```
 
-# Run all scripts
-python3 main.py --all
+Or run a single script directly:
 
-# Run only selected scripts (with or without .py)
-python3 main.py load_tiny
-python3 main.py load_idr.py load_em
+```bash
+python3 scripts/load_epfl.py
 ```
 
