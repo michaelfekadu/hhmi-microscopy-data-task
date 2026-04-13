@@ -64,12 +64,19 @@ def main():
     crop = np.squeeze(crop)  # remove channel dim
     print(f"Downloaded shape: {crop.shape}, dtype: {crop.dtype}")
 
-    # Save as TIFF
-    import tifffile
-    out_path = OUTPUT_DIR / f"hemibrain_crop_{x0}_{y0}_{z0}.tif"
-    # tifffile expects (Z, Y, X) order; CloudVolume returns (X, Y, Z)
+    # Save as Zarr
+    import zarr
+    out_path = OUTPUT_DIR / f"hemibrain_crop_{x0}_{y0}_{z0}.zarr"
+    # zarr expects (Z, Y, X) order; CloudVolume returns (X, Y, Z)
     crop_zyx = np.transpose(crop, (2, 1, 0))
-    tifffile.imwrite(str(out_path), crop_zyx)
+    z = zarr.open(
+        str(out_path),
+        mode='w',
+        shape=crop_zyx.shape,
+        chunks=(128, 128, 128),
+        dtype=crop_zyx.dtype
+    )
+    z[:] = crop_zyx
     print(f"Saved to {out_path}")
 
     # Also save crop coordinates for reproducibility
@@ -78,6 +85,7 @@ def main():
             "origin_xyz": [x0, y0, z0],
             "size": CROP_SIZE,
             "output_file": str(out_path),
+        "format": "zarr",
         }, f, indent=2)
 
     print(f"Done. Saved to {OUTPUT_DIR}")
