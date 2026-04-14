@@ -12,7 +12,7 @@ MAX_WORKERS = 5
 
 
 def all_scripts():
-    return sorted(SCRIPTS_DIR.glob("*.py"))
+    return list(SCRIPTS_DIR.glob("*.py"))
 
 
 def run_one(path):

@@ -62,9 +62,16 @@ def main():
 
     # 3. Save
     volume = np.stack(planes, axis=0)
-    import tifffile
-    out = OUTPUT_DIR / f"image_{IMAGE_ID}.tif"
-    tifffile.imwrite(str(out), volume, imagej=True)
+    import zarr
+    out = OUTPUT_DIR / f"image_{IMAGE_ID}.zarr"
+    z = zarr.open(
+        str(out),
+        mode='w',
+        shape=volume.shape,
+        chunks=(128, 128, 128),
+        dtype=volume.dtype
+    )
+    z[:] = volume
     print(f"\nDone. Files in {out}")
 
 
